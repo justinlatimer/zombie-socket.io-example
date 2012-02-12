@@ -1,0 +1,43 @@
+!!! 5
+html
+  head
+    title zombiejs socket.io example
+  body
+    div
+      span events: 
+      span#events
+    button#delay Send
+    ul#history
+    script(src="/jquery-1.7.1.js")
+    script(src="/socket.io/socket.io.js")
+    script
+      jQuery(function($) {
+        var eventId = 0;
+        var events = $('#events');
+        var history = $('#history');
+        var delay = $('#delay');
+      
+        events.text(eventId);
+        var output = function(message) {
+          var li = $('<li></li>');
+          li.id = 'event-' + eventId;
+          li.text(eventId + ': ' + message);
+          history.append(li);
+          ++eventId;
+          events.text(eventId);
+        }
+        
+        var url = window.location.protocol + '//' + window.location.hostname;
+        if (window.location.port)
+          url += ':' + window.location.port;
+        window.socket = io.connect(url + '/test');
+        socket.on('connect', function() {
+          output('connected');
+        });
+        socket.on('message', function(data) {
+          output(data.message);
+        });
+        delay.click(function() {
+          socket.emit('delay', { time: 500 });
+        });
+      });
