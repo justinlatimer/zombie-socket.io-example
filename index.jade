@@ -28,8 +28,9 @@ html
         }
         
         var url = window.location.protocol + '//' + window.location.hostname;
-        if (window.location.port)
+        if (window.location.port) {
           url += ':' + window.location.port;
+        }
         window.socket = io.connect(url + '/test');
         socket.on('connect', function() {
           output('connected');
