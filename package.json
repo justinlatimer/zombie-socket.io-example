@@ -21,5 +21,11 @@
     "socket.io": "0.8.7",
     "vows": "0.6.1",
     "zombie": "0.12.13"
-  }
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/justinlatimer/zombie-socket.io-example/blob/master/LICENSE"
+    }
+  ]
 }
